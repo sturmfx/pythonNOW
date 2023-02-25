@@ -19,7 +19,6 @@ def choose_color():
 
 def draw(event):
     circle_size = int(size.get())
-
     x = event.x
     y = event.y
     canvas.create_oval(x - circle_size, y - circle_size, x + circle_size, y + circle_size, fill=color1)
@@ -29,14 +28,22 @@ def draw2(event):
     circle_size = int(size.get())
     x = event.x
     y = event.y
-    canvas.create_rectangle(x - circle_size / 2, y - circle_size / 2, x + circle_size / 2, y + circle_size / 2,fill=color1)
+    canvas.create_rectangle(x - circle_size / 2, y - circle_size / 2, x + circle_size / 2, y + circle_size / 2,
+                            fill=color1)
+
+
+def draw3(event):
+    circle_size = int(size.get())
+    x = event.x
+    y = event.y
+    canvas.create_polygon(x, y - circle_size, x - circle_size, y + circle_size, x + circle_size, y + circle_size, fill=color1,outline='#000000')
 
 
 color = tk.Button(root, text="CHOOSE COLOR", command=choose_color)
 canvas.bind("<Button-1>", draw)
+canvas.bind("<Button-2>", draw3)
 canvas.bind("<Button-3>", draw2)
 canvas.pack()
 size.pack()
 color.pack()
 root.mainloop()
-
