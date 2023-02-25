@@ -1,6 +1,6 @@
 import tkinter as tk
 import tkinter.colorchooser as colorchooser
-
+import random
 
 root = tk.Tk()
 root.title("DRAWING CIRCLES")
@@ -45,16 +45,24 @@ def draw3(event):
 def clear(event):
     canvas.delete("all")
 
+
 def increase(event):
     current = int(size.get())
     size.delete(0, tk.END)
     size.insert(0, str(current + 1))
+
 
 def decrease(event):
     current = int(size.get())
     if current > 1:
         size.delete(0, tk.END)
         size.insert(0, str(current - 1))
+
+
+def random_color(event):
+    global color1
+    color1 = '#' + ''.join(random.choices('1234567890ABCDEF', k=6))
+    canvas.focus_set()
 
 
 color = tk.Button(root, text="CHOOSE COLOR", command=choose_color)
@@ -64,8 +72,8 @@ canvas.bind("<Button-3>", draw2)
 canvas.bind("<Key-r>", clear)
 canvas.bind("<Key-minus>", decrease)
 canvas.bind("<Key-plus>", increase)
+canvas.bind("<Key-f>", random_color)
 canvas.pack()
 size.pack()
 color.pack()
 root.mainloop()
-
