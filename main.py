@@ -45,13 +45,27 @@ def draw3(event):
 def clear(event):
     canvas.delete("all")
 
+def increase(event):
+    current = int(size.get())
+    size.delete(0, tk.END)
+    size.insert(0, str(current + 1))
+
+def decrease(event):
+    current = int(size.get())
+    if current > 1:
+        size.delete(0, tk.END)
+        size.insert(0, str(current - 1))
+
 
 color = tk.Button(root, text="CHOOSE COLOR", command=choose_color)
 canvas.bind("<Button-1>", draw)
 canvas.bind("<Button-2>", draw3)
 canvas.bind("<Button-3>", draw2)
 canvas.bind("<Key-r>", clear)
+canvas.bind("<Key-minus>", decrease)
+canvas.bind("<Key-plus>", increase)
 canvas.pack()
 size.pack()
 color.pack()
 root.mainloop()
+
