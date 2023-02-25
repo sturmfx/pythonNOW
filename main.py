@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.colorchooser as colorchooser
 
+
 root = tk.Tk()
 root.title("DRAWING CIRCLES")
 
@@ -15,6 +16,7 @@ def choose_color():
     color_c = colorchooser.askcolor(title="CHOOSE COLOR")[1]
     if color_c:
         color1 = color_c
+    canvas.focus_set()
 
 
 def draw(event):
@@ -36,13 +38,19 @@ def draw3(event):
     circle_size = int(size.get())
     x = event.x
     y = event.y
-    canvas.create_polygon(x, y - circle_size, x - circle_size, y + circle_size, x + circle_size, y + circle_size, fill=color1,outline='#000000')
+    canvas.create_polygon(x, y - circle_size, x - circle_size, y + circle_size, x + circle_size, y + circle_size,
+                          fill=color1, outline='#000000')
+
+
+def clear(event):
+    canvas.delete("all")
 
 
 color = tk.Button(root, text="CHOOSE COLOR", command=choose_color)
 canvas.bind("<Button-1>", draw)
 canvas.bind("<Button-2>", draw3)
 canvas.bind("<Button-3>", draw2)
+canvas.bind("<Key-r>", clear)
 canvas.pack()
 size.pack()
 color.pack()
